@@ -4,10 +4,10 @@ import socket
 import socks
 import time
 import html
+from telebot import types
 
-
-#ip = '178.197.249.213'  # change your proxy's ip
-#port = 1080  # change your proxy's port
+#ip = '106.75.140.200'  # change your proxy's ip
+#port = 8888  # change your proxy's port
 #socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, ip, port)
 #socket.socket = socks.socksocket
 
