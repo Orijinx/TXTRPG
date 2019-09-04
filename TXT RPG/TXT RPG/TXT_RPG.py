@@ -9,12 +9,13 @@ from telebot import types
 try:
     ip = config.proxy1.ip 
     port = config.proxy1.port
-except faildconnect:
-    ip = config.proxy1.ip 
-    port = config.proxy1.port
-
-socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-socket.socket = socks.socksocket
+    socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
+    socket.socket = socks.socksocket
+except faildConnect:
+    ip = config.proxy2.ip 
+    port = config.proxy2.port
+    socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
+    socket.socket = socks.socksocket
 
 
 bot = telebot.TeleBot(config.token)
@@ -38,6 +39,5 @@ def help_message(message):
             time.sleep(2)
             bot.send_photo(message.chat.id,config.img)
             bot.send_message(message.chat.id,'Я в пятом корпусе. Сегодня солнечно, студенты еще не устали. На улице поют птицы. Чем сегодня займемся?',reply_markup=mgameboard)
-    
 
 bot.polling()
