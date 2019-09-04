@@ -49,6 +49,12 @@ def help_message(message):
         config.char.sleep=config.char.sleep+3
         config.char.inte=config.char.inte+2
         config.char.stress=config.char.stress+1
+    elif message.text.lower() == 'Выйти покурить':
+        bot.send_message(message.chat.id,'https://www.aziaminvatat.ro/images/aai-images/aai-9510-2.jpg')
+        bot.send_message(message.chat.id, 'Вы вышли покурить. Вы поболтали со знакомыми 30минут, но получили -2 к стрессу. -0,5Ч +0И +1У -2C -2С')
+        config.char.starv=config.char.starv-2
+        config.char.sleep=config.char.sleep+1
+        config.char.stress=config.char.stress-2
     elif message.text.lower()=='проверить характеристики':
          bot.send_message(message.chat.id, 'Сытость:'+ str(config.char.starv) + ' Усталость:' + str(config.char.sleep) + ' Интеллект:' + str(config.char.inte) + ' Стресс:' +str(config.char.stress))
 
