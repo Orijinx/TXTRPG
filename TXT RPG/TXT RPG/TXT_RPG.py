@@ -3,15 +3,13 @@ import telebot
 import socket
 import socks
 import time
-import html
-from telebot import types
 
 try:
     ip = config.proxy1.ip 
     port = config.proxy1.port
     socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
     socket.socket = socks.socksocket
-except faildConnect:
+except ConnectionError:
     ip = config.proxy2.ip 
     port = config.proxy2.port
     socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
@@ -23,12 +21,17 @@ mgameboard= telebot.types.ReplyKeyboardMarkup()
 startboard= telebot.types.ReplyKeyboardMarkup()
 mgameboard.resize_keyboard=True
 startboard.resize_keyboard=True
-mgameboard.row('Отправиться на пару', 'Пойти в столовую','Выйти покурить','Отправиться в другой корпус')
+mgameboard.row('Отправиться на пару', 'Пойти в столовую','Выйти покурить','Проверить характеристики')
 startboard.row('Я готов','Объясни как играть?')
+
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
     bot.send_message(message.chat.id, 'Здравствуйте, я - Бот курсача!.\nЯ проведу вас по пути студента, готовы ли вы отправиться в путешествие?',reply_markup=startboard)
+    config.char.starv=100
+    config.char.sleep=0
+    config.char.inte=50
+    config.char.stress=0
 
 @bot.message_handler(content_types=['text'])
 def help_message(message):
@@ -37,7 +40,17 @@ def help_message(message):
     elif message.text.lower() == 'я готов':
             bot.send_message(message.chat.id, 'Добро пожаловать в лучшее учебноее завдение страны! Сегодня твой первый день. Лишь от тебя зависит закончишь ли ты обучение или отчислишься через неделю.')
             time.sleep(2)
-            bot.send_photo(message.chat.id,config.img)
+            bot.send_message(message.chat.id,'https://versiya.info/uploads/posts/2018-10/1540215615_11781.jpg')
             bot.send_message(message.chat.id,'Я в пятом корпусе. Сегодня солнечно, студенты еще не устали. На улице поют птицы. Чем сегодня займемся?',reply_markup=mgameboard)
+    elif message.text.lower() == 'отправиться на пару':
+        bot.send_message(message.chat.id,'http://vladivostok.mger2020.ru/sites/default/files/users/user1898/_dsc9941.jpg')
+        bot.send_message(message.chat.id, 'Пара прошла мимо вас. Вы просрали 2ч, но получили +2 к учебе. -2Ч +2И +3У -1C +1С')
+        config.char.starv=config.char.starv-1
+        config.char.sleep=config.char.sleep+3
+        config.char.inte=config.char.inte+2
+        config.char.stress=config.char.stress+1
+    elif message.text.lower()=='проверить характеристики':
+         bot.send_message(message.chat.id, 'Сытость:'+ str(config.char.starv) + ' Усталость:' + str(config.char.sleep) + ' Интеллект:' + str(config.char.inte) + ' Стресс:' +str(config.char.stress))
+
 
 bot.polling()
