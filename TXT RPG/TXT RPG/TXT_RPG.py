@@ -5,12 +5,12 @@ import socks
 import time
 
 try:
-    ip = config.proxy1.ip 
-    port = config.proxy1.port
+    ip = config.proxy2.ip
+    port = config.proxy2.port
     socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
     socket.socket = socks.socksocket
 except ConnectionError:
-    ip = config.proxy2.ip 
+    ip = config.proxy2.ip
     port = config.proxy2.port
     socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
     socket.socket = socks.socksocket
@@ -57,6 +57,10 @@ def help_message(message):
         config.char.stress=config.char.stress-2
     elif message.text.lower()=='проверить характеристики':
          bot.send_message(message.chat.id, 'Сытость:'+ str(config.char.starv) + ' Усталость:' + str(config.char.sleep) + ' Интеллект:' + str(config.char.inte) + ' Стресс:' +str(config.char.stress))
-
-
+    elif message.text.lower() == 'пойти в столовую':
+        bot.send_message(message.chat.id,'https://fastly.4sqi.net/img/general/600x600/21664938_4gAQshNBxjmAZOMt2EcX5Np1ZqAUHQvnowm7DxDQYs4.jpg')
+        bot.send_message(message.chat.id, 'В столовке была очередь, и вы потратили всю перемену. Зато силы восстановлены! +2 к сытости, -1 к интелекту, -1 к стрессу')
+        config.char.starv=config.char.starv+2
+        config.char.inte=config.char.inte-1
+        config.char.stress=config.char.stress-1
 bot.polling()
