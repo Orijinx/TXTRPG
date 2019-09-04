@@ -6,10 +6,15 @@ import time
 import html
 from telebot import types
 
-#ip = '106.75.140.200'  # change your proxy's ip
-#port = 8888  # change your proxy's port
-#socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-#socket.socket = socks.socksocket
+try:
+    ip = config.proxy1.ip 
+    port = config.proxy1.port
+except faildconnect:
+    ip = config.proxy1.ip 
+    port = config.proxy1.port
+
+socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
+socket.socket = socks.socksocket
 
 
 bot = telebot.TeleBot(config.token)
