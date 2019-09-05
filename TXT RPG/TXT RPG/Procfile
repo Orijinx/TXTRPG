@@ -1,2 +1,2 @@
-worker: gunicorn TXT_RPG.py
+worker: TXT_RPG.py
 worker: gunicorn TXT_RPG.py --preload
