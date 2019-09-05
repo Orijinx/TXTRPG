@@ -123,19 +123,9 @@ def help_message(message):
    else:
        bot.send_message(message.chat.id,'Чтобы начать играть - напиши /start')
 
-@server.route('/' + config.token, methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
-
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url='https://test-new-new.herokuapp.com/' + config.token)
-    return "!", 200
-
 
 if __name__ == '__main__':
-    server.debug = True
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    my_port = '0.0.0.0:' + str(port)
+    server.run(host=my_port)
+
     bot.polling()
