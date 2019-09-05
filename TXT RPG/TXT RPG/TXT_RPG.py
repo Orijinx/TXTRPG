@@ -39,7 +39,7 @@ def GameOver (message):
     elif config.char.sleep <=0:
         config.char.sleep = 0
 
-    elif config.char.inte == 0:
+    elif config.char.inte <= 0:
         config.isGameStart = False
         bot.send_message(message.chat.id,'-Вы тупой. СКазали вам в деканате и отчислили. КОНЕЦ ИГРЫ!')
     elif config.char.inte >=100:
