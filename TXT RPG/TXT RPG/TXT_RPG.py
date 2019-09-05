@@ -124,8 +124,3 @@ def help_message(message):
        bot.send_message(message.chat.id,'Чтобы начать играть - напиши /start')
 
 
-if __name__ == '__main__':
-    my_port = '0.0.0.0:' + str(port)
-    server.run(host=my_port)
-
-    bot.polling()
