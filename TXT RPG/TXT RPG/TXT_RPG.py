@@ -3,6 +3,11 @@ import telebot
 import socket
 import socks
 import time
+import os
+from flask import Flask, request
+
+server = Flask(__name__)
+
 
 #Создание соединения и бота
 try:
@@ -118,5 +123,7 @@ def help_message(message):
    else:
        bot.send_message(message.chat.id,'Чтобы начать играть - напиши /start')
 
-
-bot.polling()
+if __name__ == '__main__':
+    server.debug = True
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    bot.polling()
