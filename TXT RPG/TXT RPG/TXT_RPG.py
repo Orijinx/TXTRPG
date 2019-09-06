@@ -3,10 +3,6 @@ import telebot
 import socket
 import socks
 import time
-import os
-from flask import Flask, request
-
-server = Flask(__name__)
 
 
 #Создание соединения и бота
@@ -56,12 +52,6 @@ def GameOver (message):
         bot.send_message(message.chat.id,'После очередного нервного срыва, вы совершили самоубийство')
     elif config.char.stress <= 0:
         config.char.stress=0
-
-
-        
-
-
-
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -124,3 +114,4 @@ def help_message(message):
        bot.send_message(message.chat.id,'Чтобы начать играть - напиши /start')
 
 
+bot.polling()
