@@ -1,11 +1,9 @@
 import socket
 import time
 from multiprocessing import Queue
-
 import socks
 import telebot
-
-<<<<<<< Updated upstream
+import config
 #Создание соединения и бота
 try:
     ip = config.proxy2.ip
@@ -16,9 +14,7 @@ except ConnectionError:
     ip = config.proxy2.ip
     port = config.proxy2.port
     socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-    socket.socket = socks.socksocket
-=======
-import config
+    socket.socket = socks.socksocket 
 
 # Создание соединения и бота
 # try:
@@ -31,7 +27,6 @@ import config
 #   port = config.proxy2.port
  #  socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
   # socket.socket = socks.socksocket
->>>>>>> Stashed changes
 bot = telebot.TeleBot(config.token)
 
 # Описание переменных
