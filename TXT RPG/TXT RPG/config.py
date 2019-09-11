@@ -8,6 +8,20 @@ inWork = False
 isGameStart = False 
 
 
+class Player(object):
+    def __init__(self,Login,GS,W):
+       self.Login = Login
+       self.GS = GS
+       self.W = W
+    def GetGameState():
+        return GS, W
+        
+
+    
+
+
+
+
 class proxy1:
     ip = "69.4.86.195"
     port = 42063
