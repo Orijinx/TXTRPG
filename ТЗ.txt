@@ -1,0 +1,7 @@
+ТЕХ ЗАДАНИЕ Branch Deploy-branch:
+{
+Назначение ветки: реализация возможности деплоинга на хост-сервере Heroku для бота Bamonkabot
+Задачи: Создание метода procfile и requariments для Dynos Heroku, а так же proxy и др. методов реализации обхода Блокирова для хостинга.
+Реализация: Создание и редактирование файлов procfile and requariments {Редактирование Dynos запросов и Worker or Web процессов}
+Комментарии: Procfile{Выбор  потока Dynos процесса. Рекомендую Worker,возможно Web черех Gunicorn(Выбрать лучший вариант)},Requariments{Нужно добавить все import, используемые в TXTRPG(Bamonkabot)}
+}
