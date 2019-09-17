@@ -3,18 +3,7 @@ import time
 from multiprocessing import Queue
 import socks
 import telebot
-import config
-#Создание соединения и бота
-try:
-    ip = config.proxy2.ip
-    port = config.proxy2.port
-    socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-    socket.socket = socks.socksocket
-except ConnectionError:
-    ip = config.proxy2.ip
-    port = config.proxy2.port
-    socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-    socket.socket = socks.socksocket 
+import config 
 
 # Создание соединения и бота
 # try:
@@ -100,7 +89,9 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def help_message(message):
     BufUsers = Q.get()
+    print('Saved Log:',BufUsers.Login,'\n')
     bot.send_message(message.chat.id, BufUsers.Login)
+    print('Message from LOG:',message.from_user.id,'\n')
     while message.from_user.id != BufUsers.Login:
         Q.put(BufUsers)
         BufUsers = Q.get()
