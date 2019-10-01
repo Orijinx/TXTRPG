@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>99074a79-d372-4d60-b2de-705c03ae5946</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ori.py</StartupFile>
+    <StartupFile>from.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,10 +24,10 @@
     <Compile Include="config.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ori.py" />
-    <Compile Include="QR.py">
+    <Compile Include="from.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ori.py" />
     <Compile Include="TXT_RPG.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
