@@ -9,6 +9,7 @@ import argparse
 import qrtools
 from PIL import Image
 from pyzbar.pyzbar import decode
+import telebot
 
 #s = {"firstName": "Иван", "lastName": "Иванов", "address": { "streetAddress": "Московское ш., 101, кв.101", "city": "Ленинград", "postalCode": "101101" }, "phoneNumbers": ["812 123-1234", "916 123-4567"]}
 
@@ -91,4 +92,11 @@ class Ui_MainWindow(object):
         CamPix = QPixmap("cam.png")
         self.CamL.setPixmap(CamPix)
 
-        #Frame  = cv2.QueryFrame(capture)
+
+###############Bot Declaration
+def BotDecod(FN): 
+    QRAPI = decode(Image.open(FN))
+    T = QRAPI[0][0]
+    return T
+
+    
