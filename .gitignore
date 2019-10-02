@@ -126,3 +126,6 @@ dmypy.json
 *.sln
 *.xml
 *.iml
+*.jpg
+*.png
+*.ui
