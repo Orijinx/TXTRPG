@@ -43,17 +43,17 @@ class Ui_MainWindow(object):
         self.Output = QtWidgets.QLineEdit(self.centralwidget)
         self.Output.setObjectName('OUT')
         self.verticalLayout.addWidget(self.Output)
+        #Камера Capture
+        self.capButton = QtWidgets.QPushButton(self.centralwidget)
+        self.capButton.setObjectName('capButton')
+        self.verticalLayout.addWidget(self.capButton)
+        self.capButton.clicked.connect(self.CameraCap)
+        CamPix = QPixmap("cam.png")
+        self.CamL = QLabel(self)
+        self.CamL.setPixmap(CamPix)
+        self.verticalLayout.addWidget(self.CamL)
 
         
-
-
-
-  
-
-
-
-
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -62,26 +62,33 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("Ori", "Ori"))
         self.Button.setText(_translate("Ori", "Generate QR"))
         self.dButton.setText(_translate("Ori","Decode QR"))
+        self.capButton.setText(_translate("Ori","Capture from CAM"))
 
     def ButtClicek(self):
         URL = self.UrlEdit.text()
-        big_code = pyqrcode.create(URL, error='L', version=5,mode='binary')
+        big_code = pyqrcode.create(URL, error='L', version=10,mode='binary')
         big_code.png('code.png', scale=6, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xcc])
         pixma = QPixmap("code.png")
         self.lbl.setPixmap(pixma)
-
+#Экшин декодинга
     def Decoding(self):
-       # d = pyqrcode.decoder
         try:
-           ### fname = QFileDialog.getOpenFileName(self, 'Open file', '/c')[0]
-           # self.f = open(fname, 'r')
-           self.f = "code.png"
+            fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')[0]
+            qr = decode(Image.open(fname))
         except:
-            print('sosi')
-       
+             self.Output.setText('Error')
+        self.Output.setText(str(qr[0][0]))
+#Акшин захвата камеры
+    def CameraCap(self):
+        capture = cv2.VideoCapture(0)
 
-        #qr = qrtools.QR()
-        qr = decode(Image.open(self.f))
-        print (qr)
-        GT = qr.index
-        self.Output.setText(str(qr))
+        for i in range(30):
+           capture.read()
+        ret, frame = capture.read()
+        cv2.imwrite('cam.png', frame)
+        capture.release()
+
+        CamPix = QPixmap("cam.png")
+        self.CamL.setPixmap(CamPix)
+
+        #Frame  = cv2.QueryFrame(capture)
