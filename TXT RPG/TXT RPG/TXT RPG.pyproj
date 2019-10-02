@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>99074a79-d372-4d60-b2de-705c03ae5946</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>from.py</StartupFile>
+    <StartupFile>YCassa.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -28,7 +28,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ori.py" />
+    <Compile Include="PaySystem.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TXT_RPG.py" />
+    <Compile Include="YCassa.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
