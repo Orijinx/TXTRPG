@@ -129,3 +129,4 @@ dmypy.json
 *.ui
 *.jpg
 *.png
+*.json

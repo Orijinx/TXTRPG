@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+#import json
 import cv2
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pyqrcode
@@ -11,15 +14,18 @@ from PIL import Image
 from pyzbar.pyzbar import decode
 
 #s = {"firstName": "Иван", "lastName": "Иванов", "address": { "streetAddress": "Московское ш., 101, кв.101", "city": "Ленинград", "postalCode": "101101" }, "phoneNumbers": ["812 123-1234", "916 123-4567"]}
-
+#s = json.dumps({'Sosi':150,'2':3},sort_keys = True,indent=4)
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("Ori")
-        MainWindow.resize(320, 240)
+        MainWindow.resize(640, 480)
+        #MainWindow.geometry(self)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.hLayout = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.hLayout.setObjectName('horizLayout')
         self.UrlEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.UrlEdit.setObjectName("UrlEdit")
         self.verticalLayout.addWidget(self.UrlEdit)
@@ -27,14 +33,17 @@ class Ui_MainWindow(object):
         self.Button.setObjectName("Button")
         self.Button.clicked.connect(self.ButtClicek)
         self.verticalLayout.addWidget(self.Button)
+        self.verticalLayout.addLayout(self.hLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        #QRcodePixma
         pixmap = QPixmap("code.png")
         self.lbl = QLabel(self)
         self.lbl.setPixmap(pixmap)
-        self.verticalLayout.addWidget(self.lbl)
+        #self.lbl.mouseDoubleClickEvent(self.DBCLK,pixmap)
+        self.hLayout.addWidget(self.lbl)
         #Декодирование QR
         self.dButton = QtWidgets.QPushButton(self.centralwidget)
         self.dButton.setObjectName('dButton')
@@ -51,7 +60,7 @@ class Ui_MainWindow(object):
         CamPix = QPixmap("cam.png")
         self.CamL = QLabel(self)
         self.CamL.setPixmap(CamPix)
-        self.verticalLayout.addWidget(self.CamL)
+        self.hLayout.addWidget(self.CamL)
 
         
         self.retranslateUi(MainWindow)
@@ -65,8 +74,12 @@ class Ui_MainWindow(object):
         self.capButton.setText(_translate("Ori","Capture from CAM"))
 
     def ButtClicek(self):
-        URL = self.UrlEdit.text()
-        big_code = pyqrcode.create(URL, error='L', version=10,mode='binary')
+        try:
+            URL = self.UrlEdit.text()
+        except:
+            self.Output.setText('Input Error')
+
+        big_code = pyqrcode.create(s, error='L', version=10,mode='binary')
         big_code.png('code.png', scale=6, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xcc])
         pixma = QPixmap("code.png")
         self.lbl.setPixmap(pixma)
@@ -75,9 +88,15 @@ class Ui_MainWindow(object):
         try:
             fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')[0]
             qr = decode(Image.open(fname))
+            sqr = str(qr[0][0])
+            sqr = sqr[2:(len(sqr)-1)]
+            print(sqr)
         except:
              self.Output.setText('Error')
-        self.Output.setText(str(qr[0][0]))
+        try:
+            self.Output.setText(json.dump(sqr))
+        except:
+            self.Output.setText('Output Error')
 #Акшин захвата камеры
     def CameraCap(self):
         capture = cv2.VideoCapture(0)
@@ -90,5 +109,17 @@ class Ui_MainWindow(object):
 
         CamPix = QPixmap("cam.png")
         self.CamL.setPixmap(CamPix)
+    
+        
+    def DBCLK(self,F):
+        try:
+            qr = decode(Image.open(F))
+            sqr = qr[0][0]
+            sqr = sqr[2,(len(sqr)-1)]
+            self.Output.setText(sqr)
+        except:
+            self.Output.setText('Decode Error,Check the file')
 
-        #Frame  = cv2.QueryFrame(capture)
+        
+
+
