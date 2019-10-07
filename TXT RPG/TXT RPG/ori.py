@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#import json
 import cv2
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pyqrcode
@@ -13,8 +12,6 @@ import qrtools
 from PIL import Image
 from pyzbar.pyzbar import decode
 
-#s = {"firstName": "Иван", "lastName": "Иванов", "address": { "streetAddress": "Московское ш., 101, кв.101", "city": "Ленинград", "postalCode": "101101" }, "phoneNumbers": ["812 123-1234", "916 123-4567"]}
-#s = json.dumps({'Sosi':150,'2':3},sort_keys = True,indent=4)
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("Ori")
@@ -79,7 +76,7 @@ class Ui_MainWindow(object):
         except:
             self.Output.setText('Input Error')
 
-        big_code = pyqrcode.create(s, error='L', version=10,mode='binary')
+        big_code = pyqrcode.create(URL, error='L', version=10,mode='binary')
         big_code.png('code.png', scale=6, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xcc])
         pixma = QPixmap("code.png")
         self.lbl.setPixmap(pixma)
@@ -94,7 +91,7 @@ class Ui_MainWindow(object):
         except:
              self.Output.setText('Error')
         try:
-            self.Output.setText(json.dump(sqr))
+            self.Output.setText(sqr)
         except:
             self.Output.setText('Output Error')
 #Акшин захвата камеры
