@@ -11,6 +11,7 @@ import argparse
 import qrtools
 from PIL import Image
 from pyzbar.pyzbar import decode
+import telebot
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -117,6 +118,11 @@ class Ui_MainWindow(object):
         except:
             self.Output.setText('Decode Error,Check the file')
 
-        
+###############Bot Declaration
+def BotDecod(FN): 
+    QRAPI = decode(Image.open(FN))
+    T = QRAPI[0][0]
+    return T
 
+    
 

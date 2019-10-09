@@ -36,4 +36,9 @@ class char:
     inte=0
     stress=0
 
+
+####PAYPAL#####
+ClientID ='AcYH__jPS-FAuqXmTSVArGuygbU_Gj-7V4p0vJVpeYlUuQZ7Ly4k5Nx-8T2es5_-FIIYTuNqrKMdKYih'
+SecretID ='EO8-COnp-2zeHP52SKw25zv3rqHilcWybB38vBprHuQcpW1lQE7e60sgszpsVGFqsbCmnv6NhPBspXE8'
+
   

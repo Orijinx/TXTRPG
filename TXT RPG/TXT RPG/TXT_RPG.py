@@ -4,13 +4,11 @@ from multiprocessing import Queue
 import socks
 import telebot
 import config
+import ori
 
 # Создание соединения и бота
 #try:
-ip = config.proxy2.ip
-port = config.proxy2.port
-socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-socket.socket = socks.socksocket
+
     #except ConnectionError:
       #  ip = config.proxy2.ip
       #  port = config.proxy2.port
@@ -154,5 +152,22 @@ def help_message(message):
     else:
                 bot.send_message(message.chat.id, 'Чтобы начать играть - напиши /start')
 
+@bot.message_handler(content_types=['document'])
+def handle_docs_photo(message):
+        try:
+          chat_id = message.chat.id
+
+          file_info = bot.get_file(message.document.file_id)
+          downloaded_file = bot.download_file(file_info.file_path)
+
+          src = r'C:\Users\Acer\Documents\TXTRPG\TXT RPG\TXT RPG ' + message.document.file_name;
+          FN=message.document.file_name
+          with open(src, 'wb') as new_file:
+              new_file.write(downloaded_file)
+
+          bot.reply_to(message,str(ori.BotDecod(src)))
+        except Exception as e:
+          bot.reply_to(message, e)
+        #ori.BotDecod(FN)
 
 bot.polling()

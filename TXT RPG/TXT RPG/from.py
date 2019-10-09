@@ -1,7 +1,11 @@
+#Application import
+
 import sys  # sys нужен для передачи argv в QApplication
 from PyQt5 import QtWidgets
 import ori  # Это наш конвертированный файл дизайна
 
+
+########################Запус приложения#######################
 class ExampleApp(QtWidgets.QMainWindow, ori.Ui_MainWindow):
     def __init__(self):
         # Это здесь нужно для доступа к переменным, методам
@@ -15,7 +19,6 @@ def main():
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
 
-if __name__ == '__main__':  # Если мы запускаем файл напрямую, а не импортируем
-    main()      
+#############################СОЗДАНИЕ БОТА######################################
 
    
