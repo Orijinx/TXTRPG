@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>99074a79-d372-4d60-b2de-705c03ae5946</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TXT_RPG.py</StartupFile>
+    <StartupFile>Client.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,10 +21,28 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Client.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="config.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DATA.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handlers\FileHandler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pay.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ShopFunction.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TXT_RPG.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
