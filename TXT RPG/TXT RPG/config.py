@@ -27,6 +27,13 @@ class User(object):
     def getID(self):
         return self.ID
 
+class Order(object):
+    def __init__(self, *args, **kwargs):
+        self.Item
+        self.Val
+        self.Adr
+        self.Us
+
 
 class proxy1:
     ip = "69.4.86.195"

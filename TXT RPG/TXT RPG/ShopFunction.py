@@ -33,7 +33,7 @@ def CSV():
 
 
 
-@Client.bot.message_handler(func= lambda message:True)
+
 def Make_Order_Value(message):
       Lot_ID = int(message.text)
       DATA.MaOr.append(DATA.Cut[Lot_ID-1])

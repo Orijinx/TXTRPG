@@ -7,10 +7,10 @@ import config
 
 # Создание соединения и бота
 #try:
-ip = config.proxy2.ip
-port = config.proxy2.port
-socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
-socket.socket = socks.socksocket
+#ip = config.proxy2.ip
+#port = config.proxy2.port
+#socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, ip, port)
+#socket.socket = socks.socksocket
     #except ConnectionError:
       #  ip = config.proxy2.ip
       #  port = config.proxy2.port

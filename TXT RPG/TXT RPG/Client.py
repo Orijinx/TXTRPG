@@ -11,6 +11,8 @@ from telebot.types import LabeledPrice, ShippingOption
 ########Add###################
 import socks
 import socket
+import subprocess
+import sys
 
 
 #############CreateBot##########
@@ -41,13 +43,14 @@ STATE_DICT = {}
 MaOr = []
 prices = [LabeledPrice(label='Дерьмо', amount=5750),]
 OrderList =""
+Data_writer_off = True
 
 ########Hendler####################
 @bot.message_handler(commands=['start'])
 def start_message(message):
     Users.ID=message.from_user.id
     DATA.User_Data.append(Users)
-    bot.send_message(message.chat.id, 'Excalent! You are create a new account. Your ID:' + str(DATA.User_Data[0].ID) + ' Lets`s get started!', reply_markup=get_order_keyboard)
+    bot.send_message(message.chat.id, 'Отлично! Вы создали аккаунт:' + str(DATA.User_Data[0].ID) + ' Давайте начнем!ы', reply_markup=get_order_keyboard)
 
 @bot.message_handler(commands=['info'])
 def getAccInfo(message):
@@ -99,18 +102,18 @@ def Order(message):
  for i in range(len(DATA.User_Data)):
         if DATA.User_Data[i].ID == message.from_user.id:
             UsEr = DATA.User_Data 
- try:          
-  if UsEr.id ==  message.from_user.id: 
-    if message.text.lower() == 'да':
+ #if UsEr.id ==  message.from_user.id: 
+ if message.text.lower() == 'да':
         bot.send_message(message.chat.id,'Укажите ID товара, который вы хотите заказать')
         bot.register_next_step_handler(message,Make_Order_Value)
        
-    elif message.text.lower() == 'нет':
+ elif message.text.lower() == 'нет':
         bot.send_message(message.chat.id,'Главное меню',reply_markup=get_order_keyboard)
-        bot.register_next_step_handler(message,Start_work)
- except:
-     bot.send_message(message.chat.id, 'Вы еще не зарегестрированы! Пройти регистрацию?',reply_markup = Y_N)
-     bot.register_next_step_handler(message, Regestration)
+       # bot.register_next_step_handler(message,Start_work)
+ #except:
+ #    bot.send_message(message.chat.id, 'Вы еще не зарегестрированы! Пройти регистрацию?',reply_markup = Y_N)
+ #    bot.register_next_step_handler(message, Regestration)
+
 
 
 
@@ -133,26 +136,29 @@ def Make_Order_Done(message):
      print(DATA.MaOr)
      DATA.Proceed_Order.append(DATA.MaOr)
      bot.send_message(message.chat.id,'Ваш заказ успешно сформирован! Ожидайте \n Информация о заказе:' + str(DATA.MaOr),reply_markup = get_order_keyboard )
-     #Функция не работает
-     #ShopFunction.CSV()\
+     if Data_writer_off:
+         DATA.MaOr.reverse
+         #print(str(DATA.MaOr[0]))
+         Memory_Writer(DATA.MaOr[0])
+         DATA.MaOr.reverse
+     else:
+         print('Writer_is_on')
+
+
 
 def  Regestration(message):
      if message.text.lower() == 'да':
         bot.next_step_handlers(start_message)
 
-
-
-
-     
-
-
-
- 
+def Memory_Writer(data):
+    print(str(data))
+    DATA.f_Order = data
+    subprocess.Popen([sys.executable, 'Sub_Proc/f_writer.py'])
 
 
 
 
-        
+
 
 
 

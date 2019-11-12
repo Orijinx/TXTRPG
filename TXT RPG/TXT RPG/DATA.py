@@ -3,6 +3,7 @@ import config
 Order_inf = ['Товар:','Количество:','Адрес:','Пользователь:']
 MaOr = []
 User_Data =[ ]
+f_Order=[]
 
 
 
